@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gestión de Clientes | Panel Administración</title>
+  <link rel="stylesheet" href="../public/style.css" />
+</head>
+<body>
+  <div class="admin-navbar">
+    <div class="logo">
+      <img src="https://img.icons8.com/ios-filled/40/7a5c1c/wooden-beam.png" alt="Logo" style="height:36px;margin-right:10px;">Panel de Administración
+    </div>
+    <nav>
+      <a href="admin.html">Dashboard</a>
+      <a href="clientes.html" class="active">Clientes</a>
+      <a href="cotizaciones.html">Cotizaciones</a>
+      <a href="ordenes.html">Órdenes</a>
+      <a href="inventario.html">Inventario</a>
+      <a href="finanzas.html">Finanzas</a>
+      <a href="#salir" style="color:#e74c3c;">Salir</a>
+    </nav>
+  </div>
+  <div class="admin-content">
+    <h1 class="admin-title">Gestión de Clientes (CRM)</h1>
+    <form class="admin-form">
+      <input type="text" placeholder="Nombre del cliente">
+      <input type="text" placeholder="Teléfono">
+      <input type="email" placeholder="Correo">
+      <select>
+        <option>Etapa</option>
+        <option>Lead</option>
+        <option>Cotizado</option>
+        <option>Ganado</option>
+        <option>Perdido</option>
+      </select>
+      <input type="text" placeholder="Preferencias de material">
+      <button>Agregar</button>
+    </form>
+    <table class="admin-table">
+      <thead>
+        <tr><th>Nombre</th><th>Teléfono</th><th>Correo</th><th>Etapa</th><th>Material</th><th>Acciones</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Juan Pérez</td><td>999888777</td><td>juan@mail.com</td><td>Lead</td><td>Melamina</td><td><button>Ver</button></td></tr>
+        <tr><td>Ana Torres</td><td>988777666</td><td>ana@mail.com</td><td>Cotizado</td><td>MDF</td><td><button>Ver</button></td></tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

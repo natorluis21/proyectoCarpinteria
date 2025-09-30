@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cotizaciones | Panel Administración</title>
+  <link rel="stylesheet" href="../public/style.css" />
+</head>
+<body>
+  <div class="admin-navbar">
+    <div class="logo">
+      <img src="https://img.icons8.com/ios-filled/40/7a5c1c/wooden-beam.png" alt="Logo" style="height:36px;margin-right:10px;">Panel de Administración
+    </div>
+    <nav>
+      <a href="admin.html">Dashboard</a>
+      <a href="clientes.html">Clientes</a>
+      <a href="cotizaciones.html" class="active">Cotizaciones</a>
+      <a href="ordenes.html">Órdenes</a>
+      <a href="inventario.html">Inventario</a>
+      <a href="finanzas.html">Finanzas</a>
+      <a href="#salir" style="color:#e74c3c;">Salir</a>
+    </nav>
+  </div>
+  <div class="admin-content">
+    <h1 class="admin-title">Cotización y Presupuestos</h1>
+    <form class="admin-form">
+      <input type="text" placeholder="Cliente">
+      <input type="number" placeholder="Alto (cm)">
+      <input type="number" placeholder="Ancho (cm)">
+      <input type="number" placeholder="Profundidad (cm)">
+      <select><option>Tipo de mueble</option><option>Alacena</option><option>Walk-in Closet</option><option>Mesa</option></select>
+      <input type="text" placeholder="Acabados">
+      <input type="number" placeholder="Costo mano de obra">
+      <input type="number" placeholder="Costos fijos">
+      <button>Generar Cotización</button>
+    </form>
+    <table class="admin-table">
+      <thead><tr><th>Cliente</th><th>Mueble</th><th>Dimensiones</th><th>Acabados</th><th>Total</th><th>Acciones</th></tr></thead>
+      <tbody>
+        <tr><td>Juan Pérez</td><td>Alacena</td><td>200x80x60</td><td>Laca, Tiradores</td><td>S/ 2,500</td><td><button>PDF</button></td></tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Finanzas y Reportes | Panel Administración</title>
+  <link rel="stylesheet" href="../public/style.css" />
+</head>
+<body>
+  <div class="admin-navbar">
+    <div class="logo">
+      <img src="https://img.icons8.com/ios-filled/40/7a5c1c/wooden-beam.png" alt="Logo" style="height:36px;margin-right:10px;">Panel de Administración
+    </div>
+    <nav>
+      <a href="admin.html">Dashboard</a>
+      <a href="clientes.html">Clientes</a>
+      <a href="cotizaciones.html">Cotizaciones</a>
+      <a href="ordenes.html">Órdenes</a>
+      <a href="inventario.html">Inventario</a>
+      <a href="finanzas.html" class="active">Finanzas</a>
+      <a href="#salir" style="color:#e74c3c;">Salir</a>
+    </nav>
+  </div>
+  <div class="admin-content">
+    <h1 class="admin-title">Finanzas y Reportes</h1>
+    <div class="admin-graph">[Gráfico de ingresos vs egresos]</div>
+    <table class="admin-table">
+      <thead><tr><th>Fecha</th><th>Concepto</th><th>Ingreso</th><th>Egreso</th><th>Saldo</th></tr></thead>
+      <tbody>
+        <tr><td>01/09/2025</td><td>Proyecto A</td><td>S/ 2,500</td><td>-</td><td>S/ 2,500</td></tr>
+        <tr><td>05/09/2025</td><td>Compra Melamina</td><td>-</td><td>S/ 800</td><td>S/ 1,700</td></tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

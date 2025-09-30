@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panel de Administración | Carpintería Propuesta</title>
+  <link rel="stylesheet" href="../public/style.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" />
+  <style>
+    body { background: #f6f6f6; font-family: 'Roboto', Arial, sans-serif; }
+    .admin-navbar { background: #222; color: #fff; display: flex; align-items: center; justify-content: space-between; padding: 1rem 2rem; }
+    .admin-navbar .logo { font-size: 1.5rem; font-weight: bold; color: #b48a2c; display: flex; align-items: center; }
+    .admin-navbar nav { display: flex; gap: 2rem; }
+    .admin-navbar nav a { color: #fff; text-decoration: none; font-weight: 500; transition: color 0.2s; }
+    .admin-navbar nav a:hover, .admin-navbar nav a.active { color: #b48a2c; }
+    .admin-content { max-width: 1300px; margin: 2.5rem auto; background: #fff; border-radius: 1.2rem; box-shadow: 0 2px 16px #0001; padding: 2.5rem 2rem; }
+    .admin-title { color: #7a5c1c; font-size: 2.1rem; margin-bottom: 2.5rem; }
+    .admin-dashboard { display: flex; gap: 2rem; margin-bottom: 2.5rem; flex-wrap: wrap; }
+    .admin-card { background: #faf8f3; border-radius: 1rem; box-shadow: 0 2px 8px #0001; padding: 1.5rem 2rem; min-width: 220px; flex: 1; text-align: center; }
+    .admin-card h2 { color: #b48a2c; font-size: 2.2rem; margin: 0; }
+    .admin-card p { color: #7a5c1c; margin: 0.5rem 0 0 0; font-weight: 500; }
+    .admin-section { margin-bottom: 3.5rem; }
+    .admin-section-title { color: #b48a2c; font-size: 1.4rem; margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.5rem; }
+    .admin-table { width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; }
+    .admin-table th, .admin-table td { border: 1px solid #eee; padding: 0.7rem 0.5rem; text-align: left; }
+    .admin-table th { background: #f5f5f5; color: #7a5c1c; font-weight: 500; }
+    .admin-table tr:hover { background: #f9f7f2; }
+    .admin-form { display: flex; flex-wrap: wrap; gap: 1.2rem; margin-bottom: 1.5rem; }
+    .admin-form label { font-weight: 500; color: #7a5c1c; }
+    .admin-form input, .admin-form select { padding: 0.6rem 1rem; border-radius: 0.5rem; border: 1px solid #ccc; font-size: 1rem; }
+    .admin-form button { background: #b48a2c; color: #fff; border: none; padding: 0.7rem 2rem; border-radius: 2rem; font-size: 1rem; font-weight: bold; cursor: pointer; transition: background 0.2s; }
+    .admin-form button:hover { background: #7a5c1c; }
+    .kanban-demo { display: flex; gap: 1rem; margin-top: 1rem; }
+    .kanban-col { background: #faf8f3; border-radius: 0.7rem; padding: 1rem; min-width: 160px; flex: 1; text-align: center; box-shadow: 0 1px 4px #0001; }
+    .kanban-col strong { color: #b48a2c; }
+    .admin-alert { background: #fffbe6; color: #b48a2c; border-left: 4px solid #b48a2c; padding: 0.7rem 1rem; border-radius: 0.5rem; margin-bottom: 1rem; }
+    .admin-graph { background: #faf8f3; border-radius: 1rem; min-height: 180px; display: flex; align-items: center; justify-content: center; color: #b48a2c; font-size: 1.2rem; margin-bottom: 1.5rem; }
+    @media (max-width: 900px) { .admin-content { padding: 1rem; } .kanban-demo, .admin-dashboard { flex-direction: column; } }
+  </style>
+</head>
+<body>
+  <div class="admin-navbar">
+    <div class="logo">
+      <img src="https://img.icons8.com/ios-filled/40/7a5c1c/wooden-beam.png" alt="Logo" style="height:36px;margin-right:10px;">Panel de Administración
+    </div>
+    <nav>
+      <a href="#clientes" class="active">Clientes</a>
+      <a href="#cotizaciones">Cotizaciones</a>
+      <a href="#ordenes">Órdenes de Trabajo</a>
+      <a href="#inventario">Inventario</a>
+      <a href="#finanzas">Finanzas</a>
+      <a href="#reportes">Reportes</a>
+      <a href="#salir" style="color:#e74c3c;">Salir</a>
+    </nav>
+  </div>
+  <div class="admin-content">
+    <h1 class="admin-title">Panel de Control Interno</h1>
+    <div class="admin-dashboard">
+      <div class="admin-card">
+        <h2>24</h2>
+        <p>Clientes activos</p>
+      </div>
+      <div class="admin-card">
+        <h2>8</h2>
+        <p>Cotizaciones en curso</p>
+      </div>
+      <div class="admin-card">
+        <h2>5</h2>
+        <p>Órdenes en producción</p>
+      </div>
+      <div class="admin-card">
+        <h2>3</h2>
+        <p>Alertas de inventario</p>
+      </div>
+      <div class="admin-card">
+        <h2>S/ 12,500</h2>
+        <p>Ingresos este mes</p>
+      </div>
+    </div>
+    <!-- CRM Clientes -->
+    <div class="admin-section" id="clientes">
+      <div class="admin-section-title"><img src="https://img.icons8.com/ios-filled/24/b48a2c/conference-call.png" style="height:22px;"> Gestión de Clientes (CRM)</div>
+      <form class="admin-form">
+        <input type="text" placeholder="Nombre del cliente">
+        <input type="text" placeholder="Teléfono">
+        <input type="email" placeholder="Correo">
+        <select>
+          <option>Etapa</option>
+          <option>Lead</option>
+          <option>Cotizado</option>
+          <option>Ganado</option>
+          <option>Perdido</option>
+        </select>
+        <input type="text" placeholder="Preferencias de material">
+        <button>Agregar</button>
+      </form>
+      <table class="admin-table">
+        <thead>
+          <tr><th>Nombre</th><th>Teléfono</th><th>Correo</th><th>Etapa</th><th>Material</th><th>Acciones</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Juan Pérez</td><td>999888777</td><td>juan@mail.com</td><td>Lead</td><td>Melamina</td><td><button>Ver</button></td></tr>
+          <tr><td>Ana Torres</td><td>988777666</td><td>ana@mail.com</td><td>Cotizado</td><td>MDF</td><td><button>Ver</button></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- Cotización -->
+    <div class="admin-section" id="cotizaciones">
+      <div class="admin-section-title"><img src="https://img.icons8.com/ios-filled/24/b48a2c/estimate.png" style="height:22px;"> Cotización y Presupuestos</div>
+      <form class="admin-form">
+        <input type="text" placeholder="Cliente">
+        <input type="number" placeholder="Alto (cm)">
+        <input type="number" placeholder="Ancho (cm)">
+        <input type="number" placeholder="Profundidad (cm)">
+        <select><option>Tipo de mueble</option><option>Alacena</option><option>Walk-in Closet</option><option>Mesa</option></select>
+        <input type="text" placeholder="Acabados">
+        <input type="number" placeholder="Costo mano de obra">
+        <input type="number" placeholder="Costos fijos">
+        <button>Generar Cotización</button>
+      </form>
+      <table class="admin-table">
+        <thead><tr><th>Cliente</th><th>Mueble</th><th>Dimensiones</th><th>Acabados</th><th>Total</th><th>Acciones</th></tr></thead>
+        <tbody>
+          <tr><td>Juan Pérez</td><td>Alacena</td><td>200x80x60</td><td>Laca, Tiradores</td><td>S/ 2,500</td><td><button>PDF</button></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- Órdenes de Trabajo -->
+    <div class="admin-section" id="ordenes">
+      <div class="admin-section-title"><img src="https://img.icons8.com/ios-filled/24/b48a2c/production-order.png" style="height:22px;"> Órdenes de Trabajo (OT)</div>
+      <div class="kanban-demo">
+        <div class="kanban-col"><strong>Pendiente</strong></div>
+        <div class="kanban-col"><strong>Dimensionado</strong></div>
+        <div class="kanban-col"><strong>Canteado</strong></div>
+        <div class="kanban-col"><strong>Ensamblaje</strong></div>
+        <div class="kanban-col"><strong>Calidad</strong></div>
+        <div class="kanban-col"><strong>Montaje</strong></div>
+        <div class="kanban-col"><strong>Entregado</strong></div>
+      </div>
+      <table class="admin-table" style="margin-top:1.5rem;">
+        <thead><tr><th>Cliente</th><th>Mueble</th><th>Estado</th><th>Responsable</th><th>Entrega</th><th>Acciones</th></tr></thead>
+        <tbody>
+          <tr><td>Juan Pérez</td><td>Alacena</td><td>Ensamblaje</td><td>Operario 1</td><td>10/10/2025</td><td><button>Ver</button></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- Inventario -->
+    <div class="admin-section" id="inventario">
+      <div class="admin-section-title"><img src="https://img.icons8.com/ios-filled/24/b48a2c/warehouse.png" style="height:22px;"> Inventario y Compras</div>
+      <div class="admin-alert">Stock bajo: Melamina blanca (2 planchas)</div>
+      <table class="admin-table">
+        <thead><tr><th>Material</th><th>Tipo</th><th>Unidad</th><th>Stock</th><th>Proveedor</th><th>Acciones</th></tr></thead>
+        <tbody>
+          <tr><td>Melamina</td><td>Blanca</td><td>Planchas</td><td>2</td><td>Proveedor A</td><td><button>Comprar</button></td></tr>
+          <tr><td>MDF</td><td>Natural</td><td>Tablón</td><td>10</td><td>Proveedor B</td><td><button>Comprar</button></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- Finanzas y Reportes -->
+    <div class="admin-section" id="finanzas">
+      <div class="admin-section-title"><img src="https://img.icons8.com/ios-filled/24/b48a2c/combo-chart.png" style="height:22px;"> Finanzas y Reportes</div>
+      <div class="admin-graph">[Gráfico de ingresos vs egresos]</div>
+      <table class="admin-table">
+        <thead><tr><th>Fecha</th><th>Concepto</th><th>Ingreso</th><th>Egreso</th><th>Saldo</th></tr></thead>
+        <tbody>
+          <tr><td>01/09/2025</td><td>Proyecto A</td><td>S/ 2,500</td><td>-</td><td>S/ 2,500</td></tr>
+          <tr><td>05/09/2025</td><td>Compra Melamina</td><td>-</td><td>S/ 800</td><td>S/ 1,700</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>

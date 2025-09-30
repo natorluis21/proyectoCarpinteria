@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Órdenes de Trabajo | Panel Administración</title>
+  <link rel="stylesheet" href="../public/style.css" />
+</head>
+<body>
+  <div class="admin-navbar">
+    <div class="logo">
+      <img src="https://img.icons8.com/ios-filled/40/7a5c1c/wooden-beam.png" alt="Logo" style="height:36px;margin-right:10px;">Panel de Administración
+    </div>
+    <nav>
+      <a href="admin.html">Dashboard</a>
+      <a href="clientes.html">Clientes</a>
+      <a href="cotizaciones.html">Cotizaciones</a>
+      <a href="ordenes.html" class="active">Órdenes</a>
+      <a href="inventario.html">Inventario</a>
+      <a href="finanzas.html">Finanzas</a>
+      <a href="#salir" style="color:#e74c3c;">Salir</a>
+    </nav>
+  </div>
+  <div class="admin-content">
+    <h1 class="admin-title">Órdenes de Trabajo (OT)</h1>
+    <div class="kanban-demo">
+      <div class="kanban-col"><strong>Pendiente</strong></div>
+      <div class="kanban-col"><strong>Dimensionado</strong></div>
+      <div class="kanban-col"><strong>Canteado</strong></div>
+      <div class="kanban-col"><strong>Ensamblaje</strong></div>
+      <div class="kanban-col"><strong>Calidad</strong></div>
+      <div class="kanban-col"><strong>Montaje</strong></div>
+      <div class="kanban-col"><strong>Entregado</strong></div>
+    </div>
+    <table class="admin-table" style="margin-top:1.5rem;">
+      <thead><tr><th>Cliente</th><th>Mueble</th><th>Estado</th><th>Responsable</th><th>Entrega</th><th>Acciones</th></tr></thead>
+      <tbody>
+        <tr><td>Juan Pérez</td><td>Alacena</td><td>Ensamblaje</td><td>Operario 1</td><td>10/10/2025</td><td><button>Ver</button></td></tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

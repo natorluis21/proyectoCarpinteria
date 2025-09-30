@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Propuesta digital para carpintería moderna y elegante" />
+  <title>Carpintería Propuesta | Muebles y Soluciones Digitales</title>
+  <link rel="stylesheet" href="public/style.css" />
+</head>
+<body>
+  <div class="site-container">
+    <div class="header-top-bar-container" style="background:#f5f5f5;box-shadow:0 2px 8px #0001;">
+      <div class="header-top-bar" style="display:flex;justify-content:space-between;align-items:center;padding:0.5rem 2rem;background:#f5f5f5;">
+        <ul class="contact-details" style="list-style:none;display:flex;gap:2rem;margin:0;padding:0;font-size:0.97rem;color:#7a5c1c;">
+          <li><span class="template-location">Av. ABC 123, Ciudad</span></li>
+          <li><span class="template-phone">999 888 777</span></li>
+          <li><span class="template-mail"><a href="mailto:info@carpinteriapropuesta.com" style="color:#7a5c1c;text-decoration:none;">info@carpinteriapropuesta.com</a></span></li>
+        </ul>
+        <ul class="social-icons" style="list-style:none;display:flex;gap:1rem;margin:0;padding:0;">
+          <li><a href="#" target="_blank" class="social-facebook" style="color:#7a5c1c;font-size:1.3rem;"><img src="https://img.icons8.com/ios-filled/24/7a5c1c/facebook-new.png" alt="Facebook"/></a></li>
+          <li><a href="#" target="_blank" class="social-instagram" style="color:#7a5c1c;font-size:1.3rem;"><img src="https://img.icons8.com/ios-filled/24/7a5c1c/instagram-new.png" alt="Instagram"/></a></li>
+        </ul>
+      </div>
+    </div>
+  <header style="position:sticky;top:0;left:0;width:100vw;z-index:10001;background:#fff;box-shadow:0 2px 8px #0001;">
+      <div class="navbar" style="max-width:1200px;margin:auto;">
+        <div class="logo">
+          <img src="https://img.icons8.com/ios-filled/50/7a5c1c/wooden-beam.png" alt="Logo" style="height:48px;margin-right:10px;">CARPINTERÍA PROPUESTA
+        </div>
+        <nav class="menu">
+          <a href="#inicio">INICIO</a>
+          <a href="#empresa">EMPRESA</a>
+          <a href="#servicios">SERVICIOS</a>
+          <a href="#galeria">GALERÍA</a>
+          <a href="#trabajos">TRABAJOS</a>
+          <a href="#contacto">CONTACTO</a>
+          <a href="#blog">BLOG</a>
+          <a href="#" id="btn-login">Iniciar sesión</a>
+        </nav>
+      </div>
+    </header>
+  <main id="main-content">
+      <!-- Banner Principal (Slider) -->
+      <section class="hero-slider" id="inicio" style="position:relative;overflow:hidden;width:100vw;min-height:50vh;max-height:50vh;height:50vh;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;">
+        <div class="slider-wrapper" style="width:100vw;height:50vh;max-height:50vh;position:relative;">
+          <div class="slide active" style="background:url('https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;width:100%;height:100%;position:absolute;top:0;left:0;transition:opacity 0.7s;opacity:1;z-index:1;display:flex;align-items:center;">
+            <div style="background:rgba(255,255,255,0.85);padding:2rem 2.5rem;border-radius:1.2rem;margin-left:5vw;max-width:420px;">
+              <h1 style="font-weight:700;color:#7a5c1c;">Reformas y Ambientación de Interiores</h1>
+              <p style="font-size:1.15rem;color:#333;">Especialistas en transformar 
+                cios con madera desde 1960.</p>
+            </div>
+          </div>
+          <div class="slide" style="background:url('https://images.unsplash.com/photo-1503389152951-9c3d8bca6c94?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;width:100%;height:100%;position:absolute;top:0;left:0;transition:opacity 0.7s;opacity:0;z-index:0;display:flex;align-items:center;">
+            <div style="background:rgba(255,255,255,0.85);padding:2rem 2.5rem;border-radius:1.2rem;margin-left:5vw;max-width:420px;">
+              <h1 style="font-weight:700;color:#7a5c1c;">Muebles de Cocina a Medida</h1>
+              <p style="font-size:1.15rem;color:#333;">Diseño, fabricación e instalación de cocinas personalizadas.</p>
+            </div>
+          </div>
+          <div class="slide" style="background:url('https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;width:100%;height:100%;position:absolute;top:0;left:0;transition:opacity 0.7s;opacity:0;z-index:0;display:flex;align-items:center;">
+            <div style="background:rgba(255,255,255,0.85);padding:2rem 2.5rem;border-radius:1.2rem;margin-left:5vw;max-width:420px;">
+              <h1 style="font-weight:700;color:#7a5c1c;">Dormitorios y Armarios</h1>
+              <p style="font-size:1.15rem;color:#333;">Soluciones funcionales y elegantes para tu hogar.</p>
+            </div>
+          </div>
+          <button id="slider-prev" style="position:absolute;top:50%;left:1rem;transform:translateY(-50%);background:#fff7;border:none;border-radius:50%;width:38px;height:38px;font-size:1.5rem;color:#7a5c1c;z-index:2;cursor:pointer;">&#8592;</button>
+          <button id="slider-next" style="position:absolute;top:50%;right:1rem;transform:translateY(-50%);background:#fff7;border:none;border-radius:50%;width:38px;height:38px;font-size:1.5rem;color:#7a5c1c;z-index:2;cursor:pointer;">&#8594;</button>
+        </div>
+      </section>
+
+      <!-- Solicita Presupuesto Destacado (Full Width) -->
+      <section id="presupuesto" style="width:100vw;min-height:50vh;max-height:50vh;height:50vh;display:flex;align-items:center;position:relative;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;background:#fff;padding:0;border:none;box-shadow:0 2px 8px #0001;">
+        <div style="max-width:1200px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:0;padding:2.5rem 2.5rem;width:100vw;height:100%;">
+          <div style="flex:0 0 90px;display:flex;align-items:center;justify-content:center;">
+            <img src="https://img.icons8.com/ios-filled/64/b48a2c/wallet-app.png" alt="Presupuesto" style="background:#fff;border-radius:50%;padding:0.7rem;box-shadow:0 2px 8px #0001;">
+          </div>
+          <div style="flex:1 1 0;min-width:220px;padding:0 2rem;">
+            <h3 style="color:#222;font-size:2rem;margin-bottom:0.7rem;">SOLICITA PRESUPUESTO</h3>
+            <p style="font-size:1.13rem;color:#444;margin:0;">¿Tienes un proyecto en mente? Solicita tu presupuesto personalizado y recibe asesoría profesional para llevar tu idea a la realidad. Respuesta rápida y atención a medida para cada cliente.</p>
+          </div>
+          <div style="flex:0 0 260px;display:flex;align-items:center;justify-content:flex-end;">
+            <a href="#contacto" class="btn-primary" style="font-size:1.15rem;padding:1rem 2.2rem;border-radius:2rem;background:#8a6a2c;color:#fff;font-weight:600;box-shadow:0 2px 8px #0002;min-width:220px;text-align:center;">SOLICITA PRESUPUESTO</a>
+          </div>
+        </div>
+      </section>
+      <!-- Modal Login -->
+      <div id="modal-login" style="display:none;position:fixed;z-index:9999;left:0;top:0;width:100vw;height:100vh;background:rgba(0,0,0,0.45);justify-content:center;align-items:center;">
+        <div style="background:#fff;max-width:400px;width:90vw;padding:2.2rem 1.5rem 1.5rem 1.5rem;border-radius:1.2rem;box-shadow:0 4px 32px #0003;position:relative;">
+          <button id="close-login" style="position:absolute;top:1rem;right:1rem;background:none;border:none;font-size:1.5rem;color:#b48a2c;cursor:pointer;">&times;</button>
+          <h2 class="section-title" style="text-align:center;">Acceso Administrativo</h2>
+          <form autocomplete="off" style="display:flex;flex-direction:column;gap:1.2rem;">
+            <label for="usuario" style="font-weight:500;">Usuario</label>
+            <input id="usuario" name="usuario" type="text" placeholder="Usuario" style="padding:0.7rem 1rem;border-radius:0.5rem;border:1px solid #ccc;font-size:1rem;">
+            <label for="password" style="font-weight:500;">Contraseña</label>
+            <input id="password" name="password" type="password" placeholder="Contraseña" style="padding:0.7rem 1rem;border-radius:0.5rem;border:1px solid #ccc;font-size:1rem;">
+            <button type="submit" class="btn-primary" style="margin-top:0.5rem;">Ingresar</button>
+          </form>
+          <p style="text-align:center;font-size:0.95rem;color:#888;margin-top:1rem;">Solo personal autorizado</p>
+        </div>
+      </div>
+      <!-- Sobre la Empresa (Full Width, blanco) -->
+      <section id="empresa" style="width:100vw;position:relative;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;background:#fff;padding:0;border:none;box-shadow:0 2px 8px #0001;">
+        <div style="max-width:1200px;margin:auto;display:flex;flex-wrap:wrap;align-items:center;gap:2.5rem;padding:2.5rem 2.5rem;">
+          <div style="flex:1 1 320px;min-width:260px;">
+            <h2 class="section-title" style="color:#7a5c1c;">Especialistas en Carpintería y Mobiliario</h2>
+            <p style="font-size:1.15rem;">Somos especialistas en soluciones de carpintería y mobiliario a medida, ofreciendo proyectos personalizados para hogares y empresas. Nos enfocamos en la calidad, el diseño y la satisfacción de cada cliente, adaptándonos a cualquier necesidad.</p>
+          </div>
+          <div style="flex:1 1 320px;min-width:260px;text-align:center;">
+            <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=400&q=80" alt="Carpintería" style="width:90%;max-width:340px;border-radius:1.2rem;box-shadow:0 2px 12px #0002;">
+          </div>
+        </div>
+      </section>
+      <!-- Servicios (Full Width, blanco) -->
+      <section id="servicios" style="width:100vw;position:relative;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;background:#fff;padding:0;border:none;box-shadow:0 2px 8px #0001;">
+        <div style="max-width:1200px;margin:auto;padding:2.5rem 2.5rem;">
+          <h2 class="section-title">Nuestros Servicios</h2>
+          <div style="display:flex;flex-wrap:wrap;gap:2rem;justify-content:center;">
+            <div style="flex:1 1 220px;min-width:220px;max-width:320px;background:#fffbe9;padding:1.5rem;border-radius:1rem;box-shadow:0 2px 8px #0001;">
+              <h3 style="color:#b48a2c;margin-bottom:0.5rem;">Carpintería Interior</h3>
+              <p>Puertas, suelos, techos y todo tipo de trabajos en madera para tu hogar o negocio.</p>
+              <a href="#" style="color:#7a5c1c;text-decoration:underline;font-size:0.98rem;">Más información</a>
+            </div>
+            <div style="flex:1 1 220px;min-width:220px;max-width:320px;background:#fffbe9;padding:1.5rem;border-radius:1rem;box-shadow:0 2px 8px #0001;">
+              <h3 style="color:#b48a2c;margin-bottom:0.5rem;">Muebles de Cocina</h3>
+              <p>Diseño, fabricación e instalación de cocinas a medida, funcionales y elegantes.</p>
+              <a href="#" style="color:#7a5c1c;text-decoration:underline;font-size:0.98rem;">Más información</a>
+            </div>
+            <div style="flex:1 1 220px;min-width:220px;max-width:320px;background:#fffbe9;padding:1.5rem;border-radius:1rem;box-shadow:0 2px 8px #0001;">
+              <h3 style="color:#b48a2c;margin-bottom:0.5rem;">Dormitorios y Armarios</h3>
+              <p>Armarios empotrados, vestidores y mobiliario personalizado para dormitorios.</p>
+              <a href="#" style="color:#7a5c1c;text-decoration:underline;font-size:0.98rem;">Más información</a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Galería de Trabajos (Full Width, blanco) -->
+      <section id="galeria" style="width:100vw;position:relative;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;background:#fff;padding:0;border:none;box-shadow:0 2px 8px #0001;">
+        <div style="max-width:1200px;margin:auto;padding:2.5rem 2.5rem;">
+          <h2 class="section-title">Galería de Trabajos</h2>
+          <div style="display:flex;flex-wrap:wrap;gap:2rem;justify-content:center;">
+            <div style="background:#f5f5f5;padding:1rem;border-radius:1rem;box-shadow:0 2px 8px #0001;max-width:260px;">
+              <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=400&q=80" alt="Decoración Espacio Público" style="width:100%;border-radius:0.7rem;">
+              <h4 style="color:#7a5c1c;margin:0.7rem 0 0.3rem 0;">Decoración Espacio Público</h4>
+              <a href="#" style="color:#b48a2c;font-size:0.97rem;text-decoration:underline;">Ver detalles</a>
+            </div>
+            <div style="background:#f5f5f5;padding:1rem;border-radius:1rem;box-shadow:0 2px 8px #0001;max-width:260px;">
+              <img src="https://images.unsplash.com/photo-1503389152951-9c3d8bca6c94?auto=format&fit=crop&w=400&q=80" alt="Salones" style="width:100%;border-radius:0.7rem;">
+              <h4 style="color:#7a5c1c;margin:0.7rem 0 0.3rem 0;">Salones</h4>
+              <a href="#" style="color:#b48a2c;font-size:0.97rem;text-decoration:underline;">Ver detalles</a>
+            </div>
+            <div style="background:#f5f5f5;padding:1rem;border-radius:1rem;box-shadow:0 2px 8px #0001;max-width:260px;">
+              <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80" alt="Balaustres" style="width:100%;border-radius:0.7rem;">
+              <h4 style="color:#7a5c1c;margin:0.7rem 0 0.3rem 0;">Balaustres</h4>
+              <a href="#" style="color:#b48a2c;font-size:0.97rem;text-decoration:underline;">Ver detalles</a>
+            </div>
+            <div style="background:#f5f5f5;padding:1rem;border-radius:1rem;box-shadow:0 2px 8px #0001;max-width:260px;">
+              <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="Ambientación Interior" style="width:100%;border-radius:0.7rem;">
+              <h4 style="color:#7a5c1c;margin:0.7rem 0 0.3rem 0;">Ambientación Interior</h4>
+              <a href="#" style="color:#b48a2c;font-size:0.97rem;text-decoration:underline;">Ver detalles</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+     
+      <!-- Valores y Ubicación (Full Width, blanco) -->
+      <section id="valores" style="width:100vw;position:relative;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;background:#fff;padding:0;border:none;box-shadow:0 2px 8px #0001;">
+        <div style="max-width:1200px;margin:auto;display:flex;flex-wrap:wrap;gap:2.5rem;align-items:center;justify-content:space-between;padding:2.5rem 2.5rem;">
+          <div style="flex:1 1 260px;min-width:220px;">
+            <h2 class="section-title" style="color:#7a5c1c;">Nuestros Valores</h2>
+            <ul style="list-style:none;padding:0;margin:0;display:flex;gap:2rem;">
+              <li style="display:flex;flex-direction:column;align-items:center;">
+                <img src="https://img.icons8.com/ios-filled/48/7a5c1c/medal2.png" alt="Experiencia" style="margin-bottom:0.3rem;">
+                <span style="font-weight:600;color:#7a5c1c;">Experiencia</span>
+              </li>
+              <li style="display:flex;flex-direction:column;align-items:center;">
+                <img src="https://img.icons8.com/ios-filled/48/7a5c1c/handshake.png" alt="Compromiso" style="margin-bottom:0.3rem;">
+                <span style="font-weight:600;color:#7a5c1c;">Compromiso</span>
+              </li>
+              <li style="display:flex;flex-direction:column;align-items:center;">
+                <img src="https://img.icons8.com/ios-filled/48/7a5c1c/delivery.png" alt="Servicio Peninsular" style="margin-bottom:0.3rem;">
+                <span style="font-weight:600;color:#7a5c1c;">Servicio Peninsular</span>
+              </li>
+            </ul>
+          </div>
+          <div style="flex:1 1 260px;min-width:220px;">
+            <h2 class="section-title" style="color:#7a5c1c;">Dónde estamos</h2>
+            <p style="font-size:1.08rem;">123 ABC ciudad, peru</p>
+            <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=-6.633,40.217,-6.631,40.219&amp;layer=mapnik" style="width:100%;height:120px;border-radius:0.7rem;border:none;"></iframe>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <div style="background:#222;color:#fff;padding:2rem 0 1rem 0;">
+        <div style="max-width:1100px;margin:auto;display:flex;flex-wrap:wrap;gap:2rem;justify-content:space-between;align-items:flex-start;">
+          <div style="flex:1 1 220px;min-width:220px;">
+            <h4 style="color:#b48a2c;margin-bottom:0.5rem;">CARPINTERÍA PROPUESTA</h4>
+            <p>Desde 1960, especialistas en carpintería y mobiliario de madera en Hoyos, Cáceres.</p>
+            <ul class="social-icons" style="list-style:none;display:flex;gap:1rem;margin:0;padding:0;">
+              <li><a href="#" target="_blank"><img src="https://img.icons8.com/ios-filled/24/ffffff/facebook-new.png" alt="Facebook"/></a></li>
+              <li><a href="#" target="_blank"><img src="https://img.icons8.com/ios-filled/24/ffffff/instagram-new.png" alt="Instagram"/></a></li>
+            </ul>
+          </div>
+          <div style="flex:1 1 220px;min-width:220px;">
+            <h4 style="color:#b48a2c;margin-bottom:0.5rem;">Enlaces Rápidos</h4>
+            <ul style="list-style:none;padding:0;margin:0;">
+              <li><a href="#aviso-legal" style="color:#fff;text-decoration:none;">Aviso Legal</a></li>
+              <li><a href="#privacidad" style="color:#fff;text-decoration:none;">Política de Privacidad</a></li>
+            </ul>
+          </div>
+          <div style="flex:1 1 220px;min-width:220px;">
+            <h4 style="color:#b48a2c;margin-bottom:0.5rem;">Contacto</h4>
+            <p>123 ABC ciudad<br>Tel: 927 123 456<br><a href="mailto:info@carpinteriatorres.com" style="color:#fff;text-decoration:underline;">info@carpinteriatorres.com</a></p>
+          </div>
+        </div>
+        <div style="text-align:center;margin-top:2rem;color:#b48a2c;font-size:1rem;">
+          © 2025 CARPINTERÍA PROPUESTA | Todos los derechos reservados
+        </div>
+      </div>
+    </footer>
+    <!-- Barra de cookies y herramientas -->
+    <div id="cookie-bar" style="position:fixed;bottom:0;left:0;width:100vw;background:#fffbe9;border-top:1px solid #e0d3b8;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;z-index:9999;box-shadow:0 -2px 8px #0001;">
+      <span style="color:#7a5c1c;font-size:1rem;">Este sitio utiliza cookies para mejorar la experiencia. <a href="#privacidad" style="color:#b48a2c;text-decoration:underline;">Más información</a></span>
+      <button id="aceptar-cookies" style="background:#b48a2c;color:#fff;border:none;padding:0.5rem 1.2rem;border-radius:0.5rem;font-weight:600;cursor:pointer;">Aceptar</button>
+    </div>
+    <div id="toolbar" style="position:fixed;right:1rem;bottom:4.5rem;z-index:9999;display:flex;flex-direction:column;gap:0.7rem;">
+      <button onclick="window.print()" title="Imprimir" style="background:#fffbe9;border:1px solid #b48a2c;border-radius:50%;width:44px;height:44px;box-shadow:0 2px 8px #0001;cursor:pointer;"><img src="https://img.icons8.com/ios-filled/24/7a5c1c/print.png" alt="Imprimir"></button>
+      <button onclick="document.body.style.zoom='110%'" title="Zoom +" style="background:#fffbe9;border:1px solid #b48a2c;border-radius:50%;width:44px;height:44px;box-shadow:0 2px 8px #0001;cursor:pointer;"><img src="https://img.icons8.com/ios-filled/24/7a5c1c/zoom-in.png" alt="Zoom in"></button>
+      <button onclick="document.body.style.zoom='100%'" title="Zoom -" style="background:#fffbe9;border:1px solid #b48a2c;border-radius:50%;width:44px;height:44px;box-shadow:0 2px 8px #0001;cursor:pointer;"><img src="https://img.icons8.com/ios-filled/24/7a5c1c/zoom-out.png" alt="Zoom out"></button>
+      <button onclick="navigator.share && navigator.share({title:document.title,url:window.location.href})" title="Compartir" style="background:#fffbe9;border:1px solid #b48a2c;border-radius:50%;width:44px;height:44px;box-shadow:0 2px 8px #0001;cursor:pointer;"><img src="https://img.icons8.com/ios-filled/24/7a5c1c/share.png" alt="Compartir"></button>
+    </div>
+  </div>
+  <script src="public/script.js"></script>
+  <script>
+    // Mostrar modal login
+    document.getElementById('btn-login').onclick = function(e) {
+      e.preventDefault();
+      document.getElementById('modal-login').style.display = 'flex';
+    };
+    // Cerrar modal login
+    document.getElementById('close-login').onclick = function() {
+      document.getElementById('modal-login').style.display = 'none';
+    };
+    // Cerrar modal al hacer click fuera del contenido
+    document.getElementById('modal-login').onclick = function(e) {
+      if (e.target === this) this.style.display = 'none';
+    };
+    // Slider simple
+    let slides = document.querySelectorAll('.slide');
+    let current = 0;
+    function showSlide(idx) {
+      slides.forEach((s,i)=>{
+        s.style.opacity = (i===idx)?'1':'0';
+        s.style.zIndex = (i===idx)?'1':'0';
+        s.classList.toggle('active',i===idx);
+      });
+    }
+    document.getElementById('slider-next').onclick = function(){
+      current = (current+1)%slides.length;
+      showSlide(current);
+    };
+    document.getElementById('slider-prev').onclick = function(){
+      current = (current-1+slides.length)%slides.length;
+      showSlide(current);
+    };
+    // Cookies
+    document.getElementById('aceptar-cookies').onclick = function(){
+      document.getElementById('cookie-bar').style.display = 'none';
+    };
+  </script>
+</body>
+</html>

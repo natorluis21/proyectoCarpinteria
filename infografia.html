@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propuesta de Solución Digital para Carpintería</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Brilliant Blues -->
+    <!-- Application Structure Plan: The infographic is structured as a top-to-bottom narrative scroll. It starts with a high-level value proposition ("Before vs. After"), explains the system's architecture visually, details the key admin and client-facing modules, visualizes the core production workflow (OT Kanban), breaks down the financial investment with charts for clarity, and concludes with a clear project timeline. This structure was chosen to guide a non-technical client from the problem to the solution, its features, its cost, and the implementation plan in a logical, persuasive flow. -->
+    <!-- Visualization & Content Choices: 
+        - Before/After Comparison: Goal: Compare. Method: Two-column HTML/CSS layout. Justification: A simple, powerful way to show the transformation's value. NO SVG.
+        - System Ecosystem: Goal: Organize. Method: HTML/CSS diagram with flexbox and borders. Justification: Visualizes the app's components (Admin, Public, DB) and their relationships without technical jargon. NO SVG/Mermaid.
+        - Module Grids: Goal: Inform. Method: HTML/CSS card grid with Unicode icons. Justification: An organized and scannable way to present features. NO SVG.
+        - OT Kanban Flow: Goal: Organize. Method: Horizontal HTML/CSS flexbox diagram. Justification: Clearly illustrates the core operational improvement of the production workflow. NO SVG/Mermaid.
+        - Investment Breakdown: Goal: Inform/Compare. Method: Chart.js Donut Chart for total investment, Chart.js Bar Chart for recurring costs. Justification: Charts make financial data much easier to understand than tables. The Donut shows composition, the Bar compares distinct items. NO SVG.
+        - Project Timeline: Goal: Change. Method: HTML/CSS stepped list. Justification: A simple visual roadmap for project execution. NO SVG.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F2F2F2;
+            color: #0B2D48;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 350px;
+        }
+        .flow-line {
+            width: 100%;
+            height: 2px;
+            background-color: #A1A1A1;
+        }
+        .flow-line-v {
+            width: 2px;
+            height: 50px;
+            background-color: #A1A1A1;
+            margin: 0 auto;
+        }
+         .kanban-arrow {
+            color: #A1A1A1;
+            font-size: 2rem;
+            line-height: 1;
+            align-self: center;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-[#0B2D48] text-white text-center py-12 px-4">
+        <h1 class="text-4xl md:text-5xl font-bold mb-2">Transforme su Carpintería</h1>
+        <p class="text-lg md:text-xl text-[#F2F2F2]/80 max-w-3xl mx-auto">Una solución digital a medida para optimizar su producción, automatizar ventas y fidelizar clientes.</p>
+    </header>
+
+    <main class="container mx-auto px-4 py-12 md:py-16">
+
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-8">De la Gestión Manual a la Inteligencia de Negocio</h2>
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-red-400">
+                    <h3 class="text-2xl font-bold mb-4">Antes: El Proceso Manual</h3>
+                    <ul class="space-y-3 text-gray-600">
+                        <li class="flex items-start"><span class="text-red-500 mr-3 mt-1">●</span><span>Cálculos de cotización lentos y con errores.</span></li>
+                        <li class="flex items-start"><span class="text-red-500 mr-3 mt-1">●</span><span>Pérdida de tiempo en llamadas de seguimiento de clientes.</span></li>
+                        <li class="flex items-start"><span class="text-red-500 mr-3 mt-1">●</span><span>Descontrol de inventario y compras de última hora.</span></li>
+                        <li class="flex items-start"><span class="text-red-500 mr-3 mt-1">●</span><span>Falta de visibilidad sobre la rentabilidad real.</span></li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-[#3AB4F2]">
+                    <h3 class="text-2xl font-bold mb-4">Después: La Solución Digital</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start"><span class="text-[#3AB4F2] mr-3 mt-1">✔</span><strong>Cotizaciones precisas y automáticas en minutos.</strong></li>
+                        <li class="flex items-start"><span class="text-[#3AB4F2] mr-3 mt-1">✔</span><strong>Clientes informados con seguimiento en tiempo real.</strong></li>
+                        <li class="flex items-start"><span class="text-[#3AB4F2] mr-3 mt-1">✔</span><strong>Inventario inteligente con alertas de stock mínimo.</strong></li>
+                        <li class="flex items-start"><span class="text-[#3AB4F2] mr-3 mt-1">✔</span><strong>Reportes de rentabilidad para decisiones estratégicas.</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-16">
+             <h2 class="text-3xl font-bold text-center mb-8">El Ecosistema de su Negocio Digital</h2>
+             <div class="max-w-4xl mx-auto text-center">
+                 <div class="grid md:grid-cols-2 gap-4 items-center">
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <span class="text-4xl">👥</span>
+                        <h3 class="text-xl font-bold mt-2">Web Pública</h3>
+                        <p class="text-gray-600">Catálogo, Calculadora y Portal de Cliente.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <span class="text-4xl">⚙️</span>
+                        <h3 class="text-xl font-bold mt-2">Panel de Administración</h3>
+                        <p class="text-gray-600">CRM, Cotizaciones, OT, Inventario y Finanzas.</p>
+                    </div>
+                 </div>
+                 <div class="flex justify-center items-center my-4">
+                    <div class="w-1/4 h-0.5 bg-gray-300"></div>
+                    <span class="mx-4 text-gray-500 font-semibold">se conectan a</span>
+                    <div class="w-1/4 h-0.5 bg-gray-300"></div>
+                </div>
+                 <div class="bg-[#0B2D48] text-white p-6 rounded-lg shadow-md max-w-sm mx-auto">
+                    <span class="text-4xl">💾</span>
+                    <h3 class="text-xl font-bold mt-2">Base de Datos Centralizada</h3>
+                    <p class="text-gray-300">Toda la información de su negocio, segura y accesible.</p>
+                </div>
+             </div>
+        </section>
+
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-8">Panel de Administración: Su Centro de Mando</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <span class="text-3xl">📇</span>
+                    <h3 class="text-xl font-bold mt-2">Gestión de Clientes (CRM)</h3>
+                    <p class="text-gray-600 mt-2">Historial de interacciones y clasificación de prospectos para un seguimiento efectivo.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <span class="text-3xl">📝</span>
+                    <h3 class="text-xl font-bold mt-2">Cotización Avanzada</h3>
+                    <p class="text-gray-600 mt-2">Cálculos parametrizados que incluyen materiales, mano de obra y porcentaje de desperdicio.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <span class="text-3xl">📦</span>
+                    <h3 class="text-xl font-bold mt-2">Control de Inventario</h3>
+                    <p class="text-gray-600 mt-2">Alertas de stock mínimo y descarga automática de material por Orden de Trabajo.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md col-span-1 md:col-span-2 lg:col-span-3">
+                     <h3 class="text-xl font-bold mt-2 text-center mb-4 flex items-center justify-center"><span class="text-3xl mr-3">🛠️</span>Flujo de Producción Optimizado (Órdenes de Trabajo)</h3>
+                     <div class="bg-gray-50 p-4 rounded-lg overflow-x-auto">
+                        <div class="flex items-stretch justify-between space-x-2 text-center text-xs md:text-sm min-w-max">
+                            <div class="flex-1 bg-white p-3 rounded shadow"><strong>Pendiente</strong></div>
+                            <div class="kanban-arrow">→</div>
+                            <div class="flex-1 bg-white p-3 rounded shadow"><strong>Corte</strong></div>
+                            <div class="kanban-arrow">→</div>
+                            <div class="flex-1 bg-white p-3 rounded shadow"><strong>Ensamblaje</strong></div>
+                            <div class="kanban-arrow">→</div>
+                            <div class="flex-1 bg-white p-3 rounded shadow"><strong>Acabado</strong></div>
+                            <div class="kanban-arrow">→</div>
+                             <div class="flex-1 bg-white p-3 rounded shadow"><strong>C. Calidad</strong></div>
+                            <div class="kanban-arrow">→</div>
+                            <div class="flex-1 bg-white p-3 rounded shadow"><strong>Instalación</strong></div>
+                             <div class="kanban-arrow">→</div>
+                            <div class="flex-1 bg-green-100 text-green-800 p-3 rounded shadow"><strong>Entregado</strong></div>
+                        </div>
+                    </div>
+                </div>
+                 <div class="bg-white p-6 rounded-lg shadow-md lg:col-span-3">
+                    <span class="text-3xl">📈</span>
+                    <h3 class="text-xl font-bold mt-2">Finanzas y Reportes</h3>
+                    <p class="text-gray-600 mt-2">Visualice la rentabilidad por proyecto y gestione los saldos de clientes con gráficos dinámicos.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-8">La Experiencia para su Cliente</h2>
+            <div class="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                 <div class="bg-white p-6 rounded-lg shadow-md">
+                    <span class="text-3xl">🖼️</span>
+                    <h3 class="text-xl font-bold mt-2">Catálogo Interactivo</h3>
+                    <p class="text-gray-600 mt-2">Galería de proyectos con filtros por material, estilo y tipo de mueble.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <span class="text-3xl">🧮</span>
+                    <h3 class="text-xl font-bold mt-2">Calculadora Preliminar</h3>
+                    <p class="text-gray-600 mt-2">Capture leads calificados ofreciendo un rango de precio estimado al instante.</p>
+                </div>
+                 <div class="bg-white p-6 rounded-lg shadow-md">
+                    <span class="text-3xl">🚚</span>
+                    <h3 class="text-xl font-bold mt-2">Portal de Seguimiento</h3>
+                    <p class="text-gray-600 mt-2">Sus clientes pueden ver el avance de su proyecto en tiempo real, reduciendo la incertidumbre.</p>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-8">Desglose Visual de la Inversión</h2>
+            <div class="grid md:grid-cols-2 gap-8 items-center max-w-4xl mx-auto">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-bold text-center mb-4">Inversión Única por Desarrollo</h3>
+                    <div class="chart-container">
+                        <canvas id="investmentChart"></canvas>
+                    </div>
+                    <p class="text-center text-gray-600 mt-4">La inversión total estimada es de <strong>S/ 2,250.00</strong>.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-bold text-center mb-4">Costos Operativos Mensuales</h3>
+                     <div class="chart-container">
+                        <canvas id="recurringChart"></canvas>
+                    </div>
+                     <p class="text-center text-gray-600 mt-4">El costo recurrente total es de <strong>S/ 75.00</strong> mensuales.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2 class="text-3xl font-bold text-center mb-8">Próximos Pasos: Nuestro Plan de Acción</h2>
+            <div class="max-w-3xl mx-auto">
+                <div class="relative pl-8">
+                    <div class="absolute left-0 top-0 bottom-0 w-0.5 bg-gray-300 ml-[11px]"></div>
+                    <div class="mb-8 flex items-center">
+                        <div class="z-10 bg-[#0B2D48] text-white rounded-full w-6 h-6 flex items-center justify-center">1</div>
+                        <div class="ml-6 flex-1">
+                            <h4 class="font-bold text-lg">Reunión de Definición</h4>
+                            <p class="text-gray-600">Detallar fórmulas de costos y flujos de trabajo específicos.</p>
+                        </div>
+                    </div>
+                    <div class="mb-8 flex items-center">
+                        <div class="z-10 bg-[#0B2D48] text-white rounded-full w-6 h-6 flex items-center justify-center">2</div>
+                        <div class="ml-6 flex-1">
+                            <h4 class="font-bold text-lg">Maqueta (Mockup)</h4>
+                            <p class="text-gray-600">Presentación del diseño visual navegable para su aprobación.</p>
+                        </div>
+                    </div>
+                     <div class="mb-8 flex items-center">
+                        <div class="z-10 bg-[#0B2D48] text-white rounded-full w-6 h-6 flex items-center justify-center">3</div>
+                        <div class="ml-6 flex-1">
+                            <h4 class="font-bold text-lg">Contrato y Desarrollo</h4>
+                            <p class="text-gray-600">Firma del acuerdo e inicio formal de la programación.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="z-10 bg-[#3AB4F2] text-white rounded-full w-6 h-6 flex items-center justify-center">★</div>
+                        <div class="ml-6 flex-1">
+                            <h4 class="font-bold text-lg">Entrega, Capacitación y Lanzamiento</h4>
+                            <p class="text-gray-600">Puesta en marcha de la aplicación y entrenamiento de su equipo.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="bg-[#0B2D48] text-white text-center py-8 px-4 mt-12">
+        <p class="font-bold">Propuesta presentada por:</p>
+        <p>Luis Ángel Olórtegui Montero & Cristian Valencia Torres</p>
+        <p class="text-sm text-gray-400 mt-1">Próximos a egresar de Ingeniería de Sistemas</p>
+    </footer>
+
+    <script>
+        const investmentCtx = document.getElementById('investmentChart').getContext('2d');
+        const investmentChart = new Chart(investmentCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Fase 1: Base (S/ 1500)', 'Fase 2: Avanzada (S/ 750)'],
+                datasets: [{
+                    label: 'Inversión',
+                    data: [1500, 750],
+                    backgroundColor: [
+                        '#0B2D48',
+                        '#3AB4F2'
+                    ],
+                    borderColor: '#F2F2F2',
+                    borderWidth: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                    },
+                    tooltip: {
+                         callbacks: {
+                            title: function(tooltipItems) {
+                                const item = tooltipItems[0];
+                                let label = item.chart.data.labels[item.dataIndex];
+                                if (Array.isArray(label)) {
+                                  return label.join(' ');
+                                } else {
+                                  return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        const recurringCtx = document.getElementById('recurringChart').getContext('2d');
+        const recurringChart = new Chart(recurringCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Hosting y Dominio', 'Mantenimiento y Soporte'],
+                datasets: [{
+                    label: 'Costo Mensual (S/.)',
+                    data: [50, 25],
+                    backgroundColor: [
+                        '#0B2D48',
+                        '#3AB4F2'
+                    ],
+                    borderRadius: 4,
+                    maxBarThickness: 60
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        grid: {
+                            display: false
+                        }
+                    },
+                    y: {
+                         grid: {
+                            display: false
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: function(tooltipItems) {
+                                const item = tooltipItems[0];
+                                let label = item.chart.data.labels[item.dataIndex];
+                                if (Array.isArray(label)) {
+                                  return label.join(' ');
+                                } else {
+                                  return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
