@@ -3,250 +3,679 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Propuesta Interactiva - App para Carpintería</title>
+    <title>Propuesta Portal Web para Carpintería</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <!-- Chosen Palette: Warm Neutrals & Wood Tones -->
-    <!-- Application Structure Plan: A single-page application that serves as an interactive proposal. It uses a top navigation bar to jump between thematic sections (Overview, Admin Modules, Public Modules, Investment). This structure is chosen to guide the client through the proposal in a logical, engaging flow, transforming the static document into a tangible experience. Key interactions include a mock cost calculator and simulated financial charts to demonstrate the value of the proposed application directly. -->
-    <!-- Visualization & Content Choices: 1. Report Info: Financial Reports -> Goal: Demonstrate analytics -> Viz: Bar Chart (Chart.js) -> Interaction: Hover tooltips -> Justification: More impactful than text. 2. Report Info: Production Workflow -> Goal: Explain process tracking -> Viz: HTML/CSS Process Diagram -> Interaction: Click for details -> Justification: Clarifies operational mapping. 3. Report Info: Investment Breakdown -> Goal: Visualize costs -> Viz: Doughnut Chart (Chart.js) -> Interaction: Hover tooltips -> Justification: Easy digestion of financial data. 4. Report Info: Cost Calculator -> Goal: Demo a key public feature -> Viz: Interactive HTML Form -> Interaction: Real-time calculation on input change -> Justification: Provides a functional mini-prototype. CONFIRMING NO SVG/Mermaid. -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #FDFBF8;
-            color: #4F4646;
+            background: linear-gradient(135deg, #FEF3E2 0%, #FAF5EE 100%);
+            color: #3E2723;
         }
         .nav-link {
-            transition: color 0.3s, border-color 0.3s;
+            transition: all 0.3s ease;
+            position: relative;
         }
-        .nav-link.active {
-            color: #A16207;
-            border-bottom-color: #A16207;
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #D97706;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
         }
         .chart-container {
             position: relative;
             width: 100%;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 300px;
-            max-height: 400px;
+            height: 320px;
         }
-        @media (min-width: 768px) {
-            .chart-container {
-                height: 350px;
-            }
+        .gradient-text {
+            background: linear-gradient(135deg, #92400E 0%, #D97706 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .comparison-card {
+            position: relative;
+            overflow: hidden;
+        }
+        .comparison-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #D97706, #F59E0B);
+        }
+        .badge {
+            display: inline-block;
+            padding: 0.375rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        .process-step {
+            position: relative;
+            padding-left: 3rem;
+        }
+        .process-step::before {
+            content: '';
+            position: absolute;
+            left: 0.75rem;
+            top: 2.5rem;
+            bottom: -1.5rem;
+            width: 2px;
+            background: linear-gradient(180deg, #D97706 0%, transparent 100%);
+        }
+        .process-step:last-child::before {
+            display: none;
+        }
+        .feature-icon {
+            width: 3rem;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #FEF3E2, #FDE68A);
+            font-size: 1.5rem;
         }
     </style>
 </head>
-<body class="bg-amber-50">
+<body>
 
-    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <h1 class="text-xl font-bold text-amber-800">Propuesta: App Carpintería</h1>
-            <div class="hidden md:flex space-x-8">
-                <a href="#vision" class="nav-link border-b-2 border-transparent hover:text-amber-700">Visión General</a>
-                <a href="#admin" class="nav-link border-b-2 border-transparent hover:text-amber-700">Módulos Admin</a>
-                <a href="#publico" class="nav-link border-b-2 border-transparent hover:text-amber-700">Módulos Públicos</a>
-                <a href="#inversion" class="nav-link border-b-2 border-transparent hover:text-amber-700">Inversión</a>
-                <a href="#pasos" class="nav-link border-b-2 border-transparent hover:text-amber-700">Próximos Pasos</a>
-            </div>
-            <div class="md:hidden">
-                <select id="mobile-nav" class="bg-white border border-gray-300 rounded-md py-2 px-3 text-gray-700">
-                    <option value="#vision">Visión General</option>
-                    <option value="#admin">Módulos Admin</option>
-                    <option value="#publico">Módulos Públicos</option>
+    <header class="bg-white/90 backdrop-blur-md sticky top-0 z-50 shadow-sm border-b border-amber-100">
+        <nav class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <h1 class="text-2xl font-bold gradient-text">Portal Web Carpintería</h1>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#introduccion" class="nav-link text-stone-600 hover:text-amber-700 font-medium">Introducción</a>
+                    <a href="#funcionalidades" class="nav-link text-stone-600 hover:text-amber-700 font-medium">Funcionalidades</a>
+                    <a href="#alternativas" class="nav-link text-stone-600 hover:text-amber-700 font-medium">Alternativas</a>
+                    <a href="#inversion" class="nav-link text-stone-600 hover:text-amber-700 font-medium">Inversión</a>
+                    <a href="#siguiente" class="nav-link text-stone-600 hover:text-amber-700 font-medium">Siguiente Paso</a>
+                </div>
+                <select id="mobile-nav" class="md:hidden bg-white border border-gray-300 rounded-lg py-2 px-4 text-sm">
+                    <option value="#introduccion">Introducción</option>
+                    <option value="#funcionalidades">Funcionalidades</option>
+                    <option value="#alternativas">Alternativas</option>
                     <option value="#inversion">Inversión</option>
-                    <option value="#pasos">Próximos Pasos</option>
+                    <option value="#siguiente">Siguiente Paso</option>
                 </select>
             </div>
         </nav>
     </header>
 
-    <main class="container mx-auto px-6 py-12">
+    <main class="container mx-auto px-6 py-16">
 
-        <section id="vision" class="mb-20 text-center">
-            <h2 class="text-4xl font-bold text-amber-900 mb-4">Solución Digital a Medida</h2>
-            <p class="max-w-3xl mx-auto text-lg text-stone-700">
-                El objetivo de este proyecto es transformar su carpintería en un negocio digitalmente optimizado, moviéndola de la gestión manual a la **gestión inteligente y automatizada**. Le ofrecemos una herramienta web robusta diseñada para controlar la gestión interna, automatizar la cotización y mejorar significativamente la experiencia de sus clientes.
+        <section id="hero" class="text-center mb-24">
+            <div class="inline-block mb-4">
+                <span class="badge bg-amber-100 text-amber-800">Propuesta de Desarrollo</span>
+            </div>
+            <h1 class="text-5xl md:text-6xl font-bold mb-6">
+                <span class="gradient-text">Transforme su Carpintería</span><br>
+                <span class="text-stone-700">con Tecnología Digital</span>
+            </h1>
+            <p class="text-xl text-stone-600 max-w-3xl mx-auto leading-relaxed">
+                Una solución web completa para modernizar su negocio, optimizar la gestión interna y potenciar la experiencia de sus clientes
             </p>
         </section>
 
-        <section id="admin" class="mb-20">
-            <h2 class="text-3xl font-bold text-amber-900 mb-2 text-center">Panel de Administración</h2>
-            <p class="text-center text-stone-600 mb-10 max-w-2xl mx-auto">Este es el centro de control interno de su negocio. Explore las funcionalidades clave que le permitirán gestionar cada aspecto de su operación de manera eficiente.</p>
-            
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
-                    <h3 class="text-xl font-semibold text-amber-800 mb-3">Gestión de Clientes (CRM)</h3>
-                    <p class="text-stone-600">Centralice la información de sus clientes, registre interacciones y clasifique prospectos por etapa de venta para un seguimiento efectivo.</p>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
-                    <h3 class="text-xl font-semibold text-amber-800 mb-3">Cotización Avanzada</h3>
-                    <p class="text-stone-600">Genere presupuestos precisos en minutos con un sistema parametrizado que considera materiales, mano de obra, desperdicio y márgenes.</p>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow lg:col-span-1 md:col-span-2">
-                    <h3 class="text-xl font-semibold text-amber-800 mb-3">Control de Inventario</h3>
-                    <p class="text-stone-600">Gestione su stock de materiales, reciba alertas de inventario bajo y controle las salidas de material por cada orden de trabajo.</p>
-                </div>
-
-                <div class="md:col-span-2 lg:col-span-3 bg-white p-8 rounded-xl shadow-xl">
-                    <h3 class="text-2xl font-semibold text-amber-800 mb-6 text-center">Demostración: Flujo de Producción y Reportes</h3>
-                    <div class="lg:grid lg:grid-cols-5 gap-8">
-                        <div class="lg:col-span-2 mb-8 lg:mb-0">
-                             <h4 class="text-lg font-semibold text-stone-700 mb-4 text-center">Seguimiento de Órdenes de Trabajo (OT)</h4>
-                             <p class="text-center text-sm text-stone-500 mb-4">Visualice el progreso de cada proyecto a través de un flujo de trabajo claro y definido, desde la cotización hasta la entrega final.</p>
-                             <div class="space-y-2 text-sm">
-                                <div class="flex items-center p-3 bg-green-100 text-green-800 rounded-lg shadow-sm"><span class="font-bold mr-2">1.</span> Pendiente</div>
-                                <div class="text-center text-gray-400">↓</div>
-                                <div class="flex items-center p-3 bg-amber-100 text-amber-800 rounded-lg shadow-sm"><span class="font-bold mr-2">2.</span> Corte/Dimensionado</div>
-                                <div class="text-center text-gray-400">↓</div>
-                                <div class="flex items-center p-3 bg-amber-100 text-amber-800 rounded-lg shadow-sm"><span class="font-bold mr-2">3.</span> Ensamblaje</div>
-                                <div class="text-center text-gray-400">↓</div>
-                                <div class="flex items-center p-3 bg-blue-100 text-blue-800 rounded-lg shadow-sm"><span class="font-bold mr-2">4.</span> Control de Calidad</div>
-                                 <div class="text-center text-gray-400">↓</div>
-                                <div class="flex items-center p-3 bg-indigo-100 text-indigo-800 rounded-lg shadow-sm"><span class="font-bold mr-2">5.</span> Entregado</div>
+        <section id="introduccion" class="mb-24">
+            <div class="max-w-5xl mx-auto">
+                <div class="bg-white rounded-2xl shadow-xl p-10">
+                    <h2 class="text-3xl font-bold text-stone-800 mb-6">Introducción</h2>
+                    <p class="text-lg text-stone-600 mb-6 leading-relaxed">
+                        La presente propuesta brinda una solución digital a medida que permite modernizar completamente su carpintería, mejorando tres pilares fundamentales de su operación:
+                    </p>
+                    <div class="grid md:grid-cols-3 gap-6 mb-8">
+                        <div class="flex items-start space-x-4">
+                            <div class="feature-icon">📊</div>
+                            <div>
+                                <h3 class="font-semibold text-stone-800 mb-1">Gestión Moderna</h3>
+                                <p class="text-sm text-stone-600">Clientes y pedidos organizados digitalmente</p>
                             </div>
                         </div>
-                        <div class="lg:col-span-3">
-                            <h4 class="text-lg font-semibold text-stone-700 mb-4 text-center">Gestión de Finanzas y Reportes</h4>
-                            <p class="text-center text-sm text-stone-500 mb-4">Obtenga una visión clara de la salud de su negocio con reportes visuales. Analice la rentabilidad por proyecto para tomar mejores decisiones.</p>
-                            <div class="chart-container">
-                                <canvas id="rentabilidadChart"></canvas>
+                        <div class="flex items-start space-x-4">
+                            <div class="feature-icon">📦</div>
+                            <div>
+                                <h3 class="font-semibold text-stone-800 mb-1">Control Interno</h3>
+                                <p class="text-sm text-stone-600">Inventario y órdenes de trabajo optimizados</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="feature-icon">🌐</div>
+                            <div>
+                                <h3 class="font-semibold text-stone-800 mb-1">Experiencia Digital</h3>
+                                <p class="text-sm text-stone-600">Vitrina web moderna y accesible 24/7</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-amber-50 border-l-4 border-amber-500 p-6 rounded-r-lg">
+                        <p class="text-stone-700 font-medium mb-3">Se ofrecen dos alternativas de implementación:</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center space-x-3">
+                                <span class="text-amber-600">▸</span>
+                                <p class="text-stone-700"><strong>Portal Comercial Básico:</strong> Primera presencia digital sólida y funcional</p>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <span class="text-amber-600">▸</span>
+                                <p class="text-stone-700"><strong>Portal Comercial Avanzado:</strong> Control interno completo y profesionalización del negocio</p>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </section>
 
-        <section id="publico" class="mb-20">
-            <h2 class="text-3xl font-bold text-amber-900 mb-2 text-center">Módulos Públicos y Experiencia del Cliente</h2>
-            <p class="text-center text-stone-600 mb-10 max-w-2xl mx-auto">Esta es la cara visible de su negocio en la web. Una vitrina digital y una herramienta de interacción para atraer y fidelizar clientes.</p>
-            
-            <div class="grid md:grid-cols-2 gap-8 items-start">
-                <div class="space-y-8">
-                    <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
-                        <h3 class="text-xl font-semibold text-amber-800 mb-3">Catálogo Interactivo de Proyectos</h3>
-                        <p class="text-stone-600">Muestre sus mejores trabajos en una galería de alta calidad, con filtros por tipo de mueble, material o estilo para inspirar a sus clientes.</p>
+        <section id="funcionalidades" class="mb-24">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-stone-800 mb-4">Arquitectura de la Solución</h2>
+                <p class="text-lg text-stone-600 max-w-2xl mx-auto">
+                    La aplicación se divide en dos módulos complementarios para cubrir todas las necesidades de su negocio
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto mb-16">
+                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-8 border-2 border-blue-200">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center text-white text-xl">🔒</div>
+                        <h3 class="text-2xl font-bold text-blue-900">Panel de Administración</h3>
                     </div>
-                    <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
-                        <h3 class="text-xl font-semibold text-amber-800 mb-3">Área Privada de Seguimiento</h3>
-                        <p class="text-stone-600">Ofrezca transparencia a sus clientes permitiéndoles ver el estado de avance de su proyecto en tiempo real a través de un portal personal.</p>
-                    </div>
+                    <p class="text-blue-800 mb-4">Módulo interno para uso exclusivo de su equipo</p>
+                    <ul class="space-y-2">
+                        <li class="flex items-start space-x-2">
+                            <span class="text-blue-600 mt-1">✓</span>
+                            <span class="text-blue-900">Gestión de clientes, pedidos e inventario</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <span class="text-blue-600 mt-1">✓</span>
+                            <span class="text-blue-900">Control de órdenes de trabajo</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <span class="text-blue-600 mt-1">✓</span>
+                            <span class="text-blue-900">Reportes financieros y de producción</span>
+                        </li>
+                    </ul>
                 </div>
+
+                <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-8 border-2 border-green-200">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-12 h-12 bg-green-500 rounded-xl flex items-center justify-center text-white text-xl">🌍</div>
+                        <h3 class="text-2xl font-bold text-green-900">Web Pública</h3>
+                    </div>
+                    <p class="text-green-800 mb-4">Vitrina digital visible para todos sus clientes</p>
+                    <ul class="space-y-2">
+                        <li class="flex items-start space-x-2">
+                            <span class="text-green-600 mt-1">✓</span>
+                            <span class="text-green-900">Catálogo de productos y proyectos</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <span class="text-green-600 mt-1">✓</span>
+                            <span class="text-green-900">Formularios de cotización y contacto</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <span class="text-green-600 mt-1">✓</span>
+                            <span class="text-green-900">Seguimiento de pedidos para clientes</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="alternativas" class="mb-24">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-stone-800 mb-4">Comparativa de Alternativas</h2>
+                <p class="text-lg text-stone-600">Elija la opción que mejor se adapte a sus necesidades actuales</p>
+            </div>
+
+            <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-8">
                 
-                <div class="bg-white p-8 rounded-xl shadow-xl">
-                    <h3 class="text-2xl font-semibold text-amber-800 mb-6 text-center">Demostración: Calculadora de Presupuesto</h3>
-                    <p class="text-center text-sm text-stone-500 mb-6">Permita que sus clientes obtengan un estimado al instante. Esta herramienta interactiva califica prospectos y agiliza el proceso de venta.</p>
-                    <div class="space-y-4">
-                        <div>
-                            <label for="material" class="block text-sm font-medium text-gray-700">Material</label>
-                            <select id="material" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500">
-                                <option value="150">Melamina (S/ 150 por m²)</option>
-                                <option value="350">Madera Pino (S/ 350 por m²)</option>
-                                <option value="600">Madera Cedro (S/ 600 por m²)</option>
-                            </select>
+                <div class="comparison-card bg-white rounded-2xl shadow-xl overflow-hidden card-hover">
+                    <div class="p-8">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-2xl font-bold text-stone-800">Alternativa A</h3>
+                            <span class="badge bg-blue-100 text-blue-800">Básico</span>
                         </div>
-                        <div>
-                            <label for="ancho" class="block text-sm font-medium text-gray-700">Ancho: <span id="ancho-val">1.5</span> m</label>
-                            <input type="range" id="ancho" min="0.5" max="5" step="0.1" value="1.5" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                        <div class="mb-6">
+                            <p class="text-3xl font-bold text-amber-600 mb-2">S/ 1,800</p>
+                            <p class="text-sm text-stone-500">Portal Comercial Básico</p>
                         </div>
-                        <div>
-                            <label for="alto" class="block text-sm font-medium text-gray-700">Alto: <span id="alto-val">2.0</span> m</label>
-                            <input type="range" id="alto" min="0.5" max="3" step="0.1" value="2.0" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                        <p class="text-stone-600 mb-6">Ideal para carpinterías que buscan su primera presencia digital profesional y funcional.</p>
+                        
+                        <div class="space-y-6">
+                            <div>
+                                <h4 class="font-semibold text-stone-800 mb-3 flex items-center">
+                                    <span class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center text-blue-600 mr-2">🔐</span>
+                                    Panel de Administración
+                                </h4>
+                                <ul class="space-y-2 pl-10">
+                                    <li class="text-sm text-stone-600">• Gestión de clientes con historial</li>
+                                    <li class="text-sm text-stone-600">• Pedidos con estados básicos</li>
+                                    <li class="text-sm text-stone-600">• Inventario manual de stock</li>
+                                    <li class="text-sm text-stone-600">• Reportes básicos de ventas</li>
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h4 class="font-semibold text-stone-800 mb-3 flex items-center">
+                                    <span class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center text-green-600 mr-2">🌐</span>
+                                    Web Pública
+                                </h4>
+                                <ul class="space-y-2 pl-10">
+                                    <li class="text-sm text-stone-600">• Diseño responsivo (PC, tablet, móvil)</li>
+                                    <li class="text-sm text-stone-600">• Catálogo digital de productos</li>
+                                    <li class="text-sm text-stone-600">• Formulario de cotización</li>
+                                    <li class="text-sm text-stone-600">• Seguimiento simple de pedidos</li>
+                                    <li class="text-sm text-stone-600">• Botón de WhatsApp integrado</li>
+                                </ul>
+                            </div>
                         </div>
-                        <div class="text-center pt-4">
-                            <p class="text-lg text-stone-600">Precio Estimado:</p>
-                            <p id="precio-estimado" class="text-3xl font-bold text-amber-800">S/ 1,800.00</p>
-                            <p class="text-xs text-stone-500 mt-1">(Costo preliminar. No incluye acabados ni instalación)</p>
+
+                        <div class="mt-8 pt-6 border-t border-stone-200">
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-stone-600">Tiempo de implementación:</span>
+                                <span class="font-semibold text-stone-800">4-5 semanas</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="comparison-card bg-white rounded-2xl shadow-xl overflow-hidden card-hover border-2 border-amber-300">
+                    <div class="absolute top-4 right-4">
+                        <span class="badge bg-amber-500 text-white">Recomendado</span>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-2xl font-bold text-stone-800">Alternativa B</h3>
+                            <span class="badge bg-purple-100 text-purple-800">Avanzado</span>
+                        </div>
+                        <div class="mb-6">
+                            <p class="text-3xl font-bold text-amber-600 mb-2">S/ 5,200</p>
+                            <p class="text-sm text-stone-500">Portal Comercial Avanzado</p>
+                        </div>
+                        <p class="text-stone-600 mb-6">Para carpinterías que buscan profesionalizar y automatizar completamente su operación.</p>
+                        
+                        <div class="space-y-6">
+                            <div>
+                                <h4 class="font-semibold text-stone-800 mb-3 flex items-center">
+                                    <span class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center text-blue-600 mr-2">🔐</span>
+                                    Panel de Administración
+                                </h4>
+                                <ul class="space-y-2 pl-10">
+                                    <li class="text-sm text-stone-600">• <strong>CRM avanzado</strong> con clasificación de oportunidades</li>
+                                    <li class="text-sm text-stone-600">• <strong>OT automatizadas</strong> con flujo de producción</li>
+                                    <li class="text-sm text-stone-600">• <strong>Inventario inteligente</strong> con alertas de stock</li>
+                                    <li class="text-sm text-stone-600">• <strong>Gestión financiera</strong> completa (ingresos/egresos)</li>
+                                    <li class="text-sm text-stone-600">• <strong>Reportes visuales</strong> con gráficos de rentabilidad</li>
+                                    <li class="text-sm text-stone-600">• Control de compras y proveedores</li>
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h4 class="font-semibold text-stone-800 mb-3 flex items-center">
+                                    <span class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center text-green-600 mr-2">🌐</span>
+                                    Web Pública
+                                </h4>
+                                <ul class="space-y-2 pl-10">
+                                    <li class="text-sm text-stone-600">• Todo lo de Alternativa A, más:</li>
+                                    <li class="text-sm text-stone-600">• <strong>Catálogo interactivo</strong> con filtros avanzados</li>
+                                    <li class="text-sm text-stone-600">• <strong>Calculadora de presupuesto</strong> automática</li>
+                                    <li class="text-sm text-stone-600">• <strong>Área privada</strong> para seguimiento de clientes</li>
+                                    <li class="text-sm text-stone-600">• <strong>Pasarela de pagos</strong> (Yape, Plin, Niubiz)</li>
+                                    <li class="text-sm text-stone-600">• <strong>Notificaciones automáticas</strong> por email</li>
+                                    <li class="text-sm text-stone-600">• Optimización SEO profesional</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 pt-6 border-t border-stone-200">
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-stone-600">Tiempo de implementación:</span>
+                                <span class="font-semibold text-stone-800">7-8 semanas</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="max-w-4xl mx-auto mt-12">
+                <div class="bg-white rounded-2xl p-8 shadow-lg">
+                    <h3 class="text-2xl font-bold text-stone-800 mb-6 text-center">Demostración Interactiva: Calculadora de Presupuesto</h3>
+                    <p class="text-center text-stone-600 mb-8">Ejemplo de funcionalidad incluida en Alternativa B</p>
+                    
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-semibold text-stone-700 mb-2">Tipo de Material</label>
+                                <select id="material" class="w-full px-4 py-3 border-2 border-stone-200 rounded-xl focus:border-amber-500 focus:outline-none transition">
+                                    <option value="150">Melamina - S/ 150/m²</option>
+                                    <option value="350">Madera Pino - S/ 350/m²</option>
+                                    <option value="600">Madera Cedro - S/ 600/m²</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-semibold text-stone-700 mb-2">
+                                    Ancho: <span id="ancho-val" class="text-amber-600">1.5</span> metros
+                                </label>
+                                <input type="range" id="ancho" min="0.5" max="5" step="0.1" value="1.5" class="w-full h-3 bg-gradient-to-r from-amber-200 to-amber-400 rounded-lg appearance-none cursor-pointer">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-semibold text-stone-700 mb-2">
+                                    Alto: <span id="alto-val" class="text-amber-600">2.0</span> metros
+                                </label>
+                                <input type="range" id="alto" min="0.5" max="3" step="0.1" value="2.0" class="w-full h-3 bg-gradient-to-r from-amber-200 to-amber-400 rounded-lg appearance-none cursor-pointer">
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col justify-center items-center bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-8 border-2 border-amber-200">
+                            <p class="text-sm font-semibold text-stone-600 mb-2">Precio Estimado</p>
+                            <p id="precio-estimado" class="text-5xl font-bold gradient-text mb-4">S/ 1,800.00</p>
+                            <div class="text-xs text-stone-500 text-center space-y-1">
+                                <p>Área: <span id="area-calc" class="font-semibold">3.0</span> m²</p>
+                                <p class="text-xs mt-2">*Costo preliminar. No incluye acabados ni instalación</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="inversion" class="mb-20">
-            <h2 class="text-3xl font-bold text-amber-900 mb-10 text-center">Inversión Estimada y Condiciones</h2>
-             <div class="max-w-4xl mx-auto grid md:grid-cols-5 gap-8 items-center">
-                 <div class="md:col-span-3 bg-white p-8 rounded-xl shadow-xl">
-                    <h3 class="text-xl font-semibold text-amber-800 mb-6">Desglose de la Inversión</h3>
-                    <div class="space-y-4">
-                        <div class="flex justify-between items-baseline p-4 bg-amber-50 rounded-lg">
-                            <div>
-                                <p class="font-semibold text-stone-700">Fase 1: Implementación Base</p>
-                                <p class="text-sm text-stone-500">Diseño Web, Catálogo, CRM y Cotizador</p>
-                            </div>
-                            <p class="font-bold text-amber-900 text-lg">S/ 1,500.00</p>
+        <section id="inversion" class="mb-24">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-stone-800 mb-4">Inversión y Condiciones</h2>
+                <p class="text-lg text-stone-600">Desglose completo de costos y términos de pago</p>
+            </div>
+
+            <div class="max-w-5xl mx-auto space-y-8">
+                
+                <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+                    <div class="bg-gradient-to-r from-amber-500 to-orange-500 px-8 py-4">
+                        <h3 class="text-2xl font-bold text-white">Inversión Estimada por Fase</h3>
+                    </div>
+                    <div class="p-8">
+                        <div class="overflow-x-auto">
+                            <table class="w-full">
+                                <thead>
+                                    <tr class="border-b-2 border-stone-200">
+                                        <th class="text-left py-4 px-4 font-semibold text-stone-700">Concepto</th>
+                                        <th class="text-center py-4 px-4 font-semibold text-stone-700">Alternativa A</th>
+                                        <th class="text-center py-4 px-4 font-semibold text-stone-700">Alternativa B</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b border-stone-100 hover:bg-amber-50 transition">
+                                        <td class="py-4 px-4 text-stone-600">Fase 1: Diseño web y estructura base</td>
+                                        <td class="py-4 px-4 text-center font-semibold text-stone-800">S/ 1,200</td>
+                                        <td class="py-4 px-4 text-center font-semibold text-stone-800">S/ 2,200</td>
+                                    </tr>
+                                    <tr class="border-b border-stone-100 hover:bg-amber-50 transition">
+                                        <td class="py-4 px-4 text-stone-600">Fase 2: Funcionalidades adicionales</td>
+                                        <td class="py-4 px-4 text-center font-semibold text-stone-800">S/ 600</td>
+                                        <td class="py-4 px-4 text-center font-semibold text-stone-800">S/ 1,600</td>
+                                    </tr>
+                                    <tr class="border-b border-stone-100 hover:bg-amber-50 transition">
+                                        <td class="py-4 px-4 text-stone-600">Fase 3: Integraciones avanzadas</td>
+                                        <td class="py-4 px-4 text-center text-stone-400">–</td>
+                                        <td class="py-4 px-4 text-center font-semibold text-stone-800">S/ 1,400</td>
+                                    </tr>
+                                    <tr class="bg-gradient-to-r from-amber-100 to-orange-100">
+                                        <td class="py-4 px-4 font-bold text-stone-800">TOTAL</td>
+                                        <td class="py-4 px-4 text-center text-2xl font-bold text-amber-700">S/ 1,800</td>
+                                        <td class="py-4 px-4 text-center text-2xl font-bold text-amber-700">S/ 5,200</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
-                        <div class="flex justify-between items-baseline p-4 bg-amber-50 rounded-lg">
-                            <div>
-                                <p class="font-semibold text-stone-700">Fase 2: Módulos Avanzados</p>
-                                <p class="text-sm text-stone-500">OT, Inventario y Portal de Cliente</p>
+
+                        <div class="mt-8 pt-8 border-t border-stone-200">
+                            <div class="chart-container mx-auto" style="max-width: 500px;">
+                                <canvas id="inversionChart"></canvas>
                             </div>
-                            <p class="font-bold text-amber-900 text-lg">S/ 750.00</p>
-                        </div>
-                        <div class="flex justify-between items-baseline p-4 border-t-2 border-amber-200 mt-4">
-                            <p class="font-bold text-stone-800 text-lg">INVERSIÓN TOTAL</p>
-                            <p class="font-bold text-amber-900 text-2xl">S/ 2,250.00</p>
                         </div>
                     </div>
-                    <h3 class="text-xl font-semibold text-amber-800 mt-8 mb-4">Costos Recurrentes</h3>
-                     <div class="text-sm text-stone-600 space-y-2">
-                         <p><span class="font-semibold">Hosting y Dominio:</span> S/ 50.00 / mes</p>
-                         <p><span class="font-semibold">Mantenimiento y Soporte:</span> S/ 25.00 / mes</p>
-                     </div>
-                 </div>
-                 <div class="md:col-span-2">
-                    <div class="chart-container h-64 md:h-auto">
-                        <canvas id="inversionChart"></canvas>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-white rounded-2xl shadow-lg p-8">
+                        <h3 class="text-xl font-bold text-stone-800 mb-6">Condiciones de Pago</h3>
+                        
+                        <div class="mb-6 pb-6 border-b border-stone-200">
+                            <h4 class="font-semibold text-amber-700 mb-4">Alternativa A (S/ 1,800)</h4>
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-stone-600">30% Anticipo</span>
+                                    <span class="font-bold text-stone-800">S/ 540</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-stone-600">40% Al iniciar</span>
+                                    <span class="font-bold text-stone-800">S/ 720</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-stone-600">30% Contra entrega</span>
+                                    <span class="font-bold text-stone-800">S/ 540</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 class="font-semibold text-amber-700 mb-4">Alternativa B (S/ 5,200)</h4>
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-stone-600">30% Anticipo</span>
+                                    <span class="font-bold text-stone-800">S/ 1,560</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-stone-600">40% Al iniciar</span>
+                                    <span class="font-bold text-stone-800">S/ 2,080</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-stone-600">30% Contra entrega</span>
+                                    <span class="font-bold text-stone-800">S/ 1,560</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                 </div>
-             </div>
+
+                    <div class="bg-white rounded-2xl shadow-lg p-8">
+                        <h3 class="text-xl font-bold text-stone-800 mb-6">Costos Recurrentes</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start space-x-3">
+                                <div class="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <span class="text-amber-600">🌐</span>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-stone-800">Hosting y Dominio</p>
+                                    <p class="text-sm text-stone-600">S/ 50 mensuales aproximadamente</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <span class="text-amber-600">🔧</span>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-stone-800">Mantenimiento y Soporte</p>
+                                    <p class="text-sm text-stone-600">Entre S/ 25 y S/ 100 mensuales según alcance</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 pt-8 border-t border-stone-200">
+                            <h3 class="text-xl font-bold text-stone-800 mb-6">Garantía y Capacitación</h3>
+                            <ul class="space-y-3">
+                                <li class="flex items-start space-x-2">
+                                    <span class="text-green-600 mt-1">✓</span>
+                                    <div>
+                                        <span class="font-semibold text-stone-800">Garantía:</span>
+                                        <span class="text-stone-600"> 3 meses de soporte correctivo</span>
+                                    </div>
+                                </li>
+                                <li class="flex items-start space-x-2">
+                                    <span class="text-green-600 mt-1">✓</span>
+                                    <div>
+                                        <span class="font-semibold text-stone-800">Capacitación:</span>
+                                        <span class="text-stone-600"> 4 horas para el equipo interno</span>
+                                    </div>
+                                </li>
+                                <li class="flex items-start space-x-2">
+                                    <span class="text-green-600 mt-1">✓</span>
+                                    <div>
+                                        <span class="font-semibold text-stone-800">Manual digital:</span>
+                                        <span class="text-stone-600"> Guía de usuario en PDF</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </section>
 
-        <section id="pasos" class="text-center bg-white p-12 rounded-2xl shadow-xl">
-            <h2 class="text-3xl font-bold text-amber-900 mb-6">Próximos Pasos</h2>
-            <div class="max-w-4xl mx-auto grid md:grid-cols-3 gap-8">
-                <div class="text-center">
-                    <div class="mx-auto bg-amber-100 text-amber-800 w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mb-4">1</div>
-                    <h3 class="text-xl font-semibold text-stone-800 mb-2">Reunión de Definición</h3>
-                    <p class="text-stone-600">Detallamos las fórmulas exactas de cotización y los flujos de trabajo específicos de su carpintería.</p>
+        <section id="siguiente" class="mb-24">
+            <div class="max-w-5xl mx-auto">
+                <div class="bg-gradient-to-br from-amber-500 to-orange-600 rounded-3xl shadow-2xl p-12 text-white text-center">
+                    <h2 class="text-4xl font-bold mb-4">Próximos Pasos</h2>
+                    <p class="text-xl mb-12 opacity-90">Un proceso simple y transparente para iniciar su proyecto</p>
+                    
+                    <div class="grid md:grid-cols-3 gap-8 text-left">
+                        <div class="process-step">
+                            <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-3xl font-bold text-amber-600 mb-4">1</div>
+                            <h3 class="text-xl font-bold mb-3">Reunión de Definición</h3>
+                            <p class="text-amber-50">Detallamos las fórmulas exactas de cotización y los flujos de trabajo específicos de su carpintería.</p>
+                        </div>
+                        
+                        <div class="process-step">
+                            <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-3xl font-bold text-amber-600 mb-4">2</div>
+                            <h3 class="text-xl font-bold mb-3">Maqueta Visual</h3>
+                            <p class="text-amber-50">Presentamos el diseño visual navegable para su revisión y aprobación final antes de programar.</p>
+                        </div>
+                        
+                        <div class="process-step">
+                            <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-3xl font-bold text-amber-600 mb-4">3</div>
+                            <h3 class="text-xl font-bold mb-3">Desarrollo e Implementación</h3>
+                            <p class="text-amber-50">Firma del contrato, pago del anticipo e inicio formal del desarrollo de su nueva aplicación web.</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-12 pt-8 border-t border-white/30">
+                        <p class="text-lg mb-4">¿Listo para transformar su carpintería?</p>
+                        <p class="text-amber-100">Contáctenos para agendar una reunión sin compromiso</p>
+                    </div>
                 </div>
-                <div class="text-center">
-                    <div class="mx-auto bg-amber-100 text-amber-800 w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mb-4">2</div>
-                    <h3 class="text-xl font-semibold text-stone-800 mb-2">Maqueta (Mockup)</h3>
-                    <p class="text-stone-600">Presentamos el diseño visual navegable para su revisión y aprobación final antes de programar.</p>
-                </div>
-                <div class="text-center">
-                    <div class="mx-auto bg-amber-100 text-amber-800 w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mb-4">3</div>
-                    <h3 class="text-xl font-semibold text-stone-800 mb-2">Contrato y Desarrollo</h3>
-                    <p class="text-stone-600">Firma del contrato, pago del anticipo e inicio formal del desarrollo de su nueva aplicación web.</p>
+            </div>
+        </section>
+
+        <section id="resumen" class="mb-24">
+            <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl p-10">
+                <h2 class="text-3xl font-bold text-stone-800 mb-8 text-center">Resumen de la Propuesta</h2>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="font-semibold text-amber-700 mb-2">Alcance del Proyecto</h3>
+                            <p class="text-stone-600">Desarrollo completo de portal web con panel administrativo y vitrina pública, adaptado a las necesidades específicas de su carpintería.</p>
+                        </div>
+                        
+                        <div>
+                            <h3 class="font-semibold text-amber-700 mb-2">Tecnología</h3>
+                            <p class="text-stone-600">Desarrollo web moderno, responsive y optimizado para SEO. Compatible con todos los dispositivos.</p>
+                        </div>
+                        
+                        <div>
+                            <h3 class="font-semibold text-amber-700 mb-2">Entregables</h3>
+                            <ul class="text-stone-600 space-y-1 text-sm">
+                                <li>• Aplicación web completa y funcional</li>
+                                <li>• Manual de usuario en PDF</li>
+                                <li>• Capacitación del equipo (4 horas)</li>
+                                <li>• 3 meses de garantía de software</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="font-semibold text-amber-700 mb-2">Opciones de Inversión</h3>
+                            <div class="space-y-2 text-sm">
+                                <div class="flex justify-between items-center p-3 bg-blue-50 rounded-lg">
+                                    <span class="text-stone-700">Alternativa A - Básico</span>
+                                    <span class="font-bold text-blue-700">S/ 1,800</span>
+                                </div>
+                                <div class="flex justify-between items-center p-3 bg-purple-50 rounded-lg">
+                                    <span class="text-stone-700">Alternativa B - Avanzado</span>
+                                    <span class="font-bold text-purple-700">S/ 5,200</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h3 class="font-semibold text-amber-700 mb-2">Plazos de Entrega</h3>
+                            <div class="space-y-2 text-sm">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-stone-600">Alternativa A:</span>
+                                    <span class="font-semibold text-stone-800">4-5 semanas</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-stone-600">Alternativa B:</span>
+                                    <span class="font-semibold text-stone-800">7-8 semanas</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h3 class="font-semibold text-amber-700 mb-2">Vigencia de Propuesta</h3>
+                            <p class="text-stone-600 text-sm">Esta propuesta tiene vigencia de 30 días a partir de la fecha de emisión.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
     </main>
 
-    <footer class="bg-stone-800 text-white mt-20">
-        <div class="container mx-auto px-6 py-4 text-center text-sm">
-            <p>Propuesta preparada por [Su Nombre/Nombre de la Empresa]</p>
-            <p>Fecha de Emisión: [Fecha]</p>
+    <footer class="bg-gradient-to-r from-stone-800 to-stone-900 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="text-center">
+                <p class="text-lg font-semibold mb-2">Propuesta preparada por</p>
+                <p class="text-2xl font-bold mb-4">Olortegui Montero Luis Angel - Cristian Valencia Torres</p>
+                <p class="text-stone-400">Email: natorluis@gmail.com</p> 
+                <p class="text-stone-400">Fecha de Emisión: 29/09/2025</p>
+                <div class="mt-8 pt-8 border-t border-stone-700">
+                    <p class="text-sm text-stone-400">Esta propuesta es confidencial y exclusiva para el destinatario</p>
+                </div>
+            </div>
         </div>
     </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             
+            // Mobile Navigation
             const mobileNav = document.getElementById('mobile-nav');
             mobileNav.addEventListener('change', (e) => {
                 window.location.href = e.target.value;
             });
 
+            // Active Navigation Links
             const sections = document.querySelectorAll('section');
             const navLinks = document.querySelectorAll('.nav-link');
 
@@ -254,16 +683,22 @@
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         navLinks.forEach(link => {
-                            link.classList.toggle('active', link.getAttribute('href').substring(1) === entry.target.id);
+                            const href = link.getAttribute('href');
+                            if (href && href.substring(1) === entry.target.id) {
+                                link.classList.add('active');
+                            } else {
+                                link.classList.remove('active');
+                            }
                         });
                     }
                 });
             }, { threshold: 0.5 });
 
             sections.forEach(section => {
-                observer.observe(section);
+                if (section.id) observer.observe(section);
             });
 
+            // Price Calculator
             function calculatePrice() {
                 const materialPrice = parseFloat(document.getElementById('material').value);
                 const ancho = parseFloat(document.getElementById('ancho').value);
@@ -273,6 +708,8 @@
                 document.getElementById('alto-val').textContent = alto.toFixed(1);
 
                 const area = ancho * alto;
+                document.getElementById('area-calc').textContent = area.toFixed(2);
+                
                 const cost = area * materialPrice * 1.5;
 
                 document.getElementById('precio-estimado').textContent = `S/ ${cost.toLocaleString('es-PE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
@@ -284,44 +721,61 @@
             
             calculatePrice();
 
-            const rentabilidadCtx = document.getElementById('rentabilidadChart').getContext('2d');
-            new Chart(rentabilidadCtx, {
-                type: 'bar',
+            // Investment Chart
+            const inversionCtx = document.getElementById('inversionChart').getContext('2d');
+            new Chart(inversionCtx, {
+                type: 'doughnut',
                 data: {
-                    labels: ['Cocina Cedro', 'Closet Melamina', 'Escritorio Pino', 'Puerta Principal', 'Mueble de TV'],
+                    labels: ['Fase 1: Diseño y Base', 'Fase 2: Funcionalidades', 'Fase 3: Integraciones'],
                     datasets: [{
-                        label: 'Rentabilidad (S/)',
-                        data: [4500, 2800, 1500, 3200, 1900],
+                        label: 'Inversión por Fase (Alt. B)',
+                        data: [2200, 1600, 1400],
                         backgroundColor: [
-                            'rgba(161, 98, 7, 0.6)',
-                            'rgba(217, 119, 6, 0.6)',
-                            'rgba(245, 158, 11, 0.6)',
-                            'rgba(202, 138, 4, 0.6)',
-                            'rgba(180, 83, 9, 0.6)'
+                            'rgba(217, 119, 6, 0.8)',
+                            'rgba(245, 158, 11, 0.8)',
+                            'rgba(251, 191, 36, 0.8)'
                         ],
                         borderColor: [
-                            'rgba(161, 98, 7, 1)',
                             'rgba(217, 119, 6, 1)',
                             'rgba(245, 158, 11, 1)',
-                            'rgba(202, 138, 4, 1)',
-                            'rgba(180, 83, 9, 1)'
+                            'rgba(251, 191, 36, 1)'
                         ],
-                        borderWidth: 1
+                        borderWidth: 2
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
-                        legend: { display: false },
-                        title: { display: true, text: 'Rentabilidad por Tipo de Proyecto (Ejemplo)' }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                             ticks: {
-                                callback: function(value) {
-                                    return 'S/ ' + value;
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 15,
+                                font: {
+                                    size: 12
+                                }
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Distribución de Inversión - Alternativa B',
+                            font: {
+                                size: 16,
+                                weight: 'bold'
+                            },
+                            padding: {
+                                bottom: 20
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    label += 'S/ ' + context.parsed.toLocaleString('es-PE');
+                                    return label;
                                 }
                             }
                         }
@@ -329,38 +783,18 @@
                 }
             });
 
-            const inversionCtx = document.getElementById('inversionChart').getContext('2d');
-            new Chart(inversionCtx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Fase 1: Implementación Base', 'Fase 2: Módulos Avanzados'],
-                    datasets: [{
-                        label: 'Inversión por Fase',
-                        data: [1500, 750],
-                        backgroundColor: [
-                            'rgba(161, 98, 7, 0.7)',
-                            'rgba(245, 158, 11, 0.7)'
-                        ],
-                        borderColor: [
-                            'rgba(161, 98, 7, 1)',
-                            'rgba(245, 158, 11, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                 options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'bottom',
-                        },
-                        title: {
-                            display: true,
-                            text: 'Distribución de la Inversión'
-                        }
+            // Smooth Scroll
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
                     }
-                }
+                });
             });
         });
     </script>
